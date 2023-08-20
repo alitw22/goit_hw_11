@@ -1,6 +1,3 @@
-# please add annotation to the code:
-# в данный код необходимо добавить аннотирование типов:
-
 from collections import UserDict
 from datetime import datetime, date
 from typing import Optional, List, Union
