@@ -17,22 +17,31 @@ class Name(Field):
     pass
 
 class Phone(Field):
+
     def set_value(self, value: str):
         if not self.validate_phone(value):
             raise ValueError("Invalid phone number")
         self._value = value
     
     def validate_phone(self, phone: str) -> bool:
+        if not isinstance(phone, str) or not phone.isdigit() or len(phone) != 9:
+            return False
         return True
 
 class Birthday(Field):
     def set_value(self, value: date):
         if not self.validate_birthday(value):
-            raise ValueError("Invalid birthday")
+           raise ValueError("Invalid birthday")
         self._value = value
 
-    def validate_birthday(self, birthday: date) -> bool:
-        return True
+    def validate_birthday(self, birthday: str) -> bool:
+        try:
+            #  if not isinstance(birthday, str) or not datetime.strptime(birthday,'%Y-%m-%d').date():  
+            datetime.strptime(birthday,'%Y-%m-%d').date()   
+        except ValueError: 
+            return False
+        else:            
+           return True        
 
     def get_month(self) -> int:
         return self._value.month
